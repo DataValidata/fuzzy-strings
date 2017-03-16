@@ -1,0 +1,4 @@
+suites:
+    datavalidata_suite:
+        namespace: DataValidata\FuzzyStrings
+        psr4_prefix: DataValidata\FuzzyStrings

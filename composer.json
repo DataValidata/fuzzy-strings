@@ -2,14 +2,19 @@
     "name": "datavalidata/fuzzy-strings",
     "description": "Fuzzy String matching library",
     "type": "library",
-    "require-dev": {
-        "phpspec/phpspec": "^3.2"
-    },
     "authors": [
         {
             "name": "Ciaran Kelly",
             "email": "ciaran@datavalidata.com"
         }
     ],
-    "require": {}
+    "autoload": {
+        "psr-4": {
+            "DataValidata\\FuzzyStrings\\" : "src"
+        }
+    },
+    "require": {},
+    "require-dev": {
+        "phpspec/phpspec": "^3.2"
+    }
 }
