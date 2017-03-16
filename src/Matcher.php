@@ -36,6 +36,10 @@ class Matcher
             return false;
         }
 
+        if($minimumEditsRequired === strlen($needle)) {
+            return false;
+        }
+
         return $minimumEditsRequired <= $threshold;
     }
 

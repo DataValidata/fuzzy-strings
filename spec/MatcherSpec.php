@@ -42,4 +42,9 @@ class MatcherSpec extends ObjectBehavior
         $this->inexactly()->matches("needle", "can you find the nee in this haystack?", 3)->shouldBe(true);
         $this->inexactly()->matches("needle", "can you find the ne in this haystack?", 3)->shouldBe(false);
     }
+
+    function it_does_not_give_false_positives_where_the_entire_needle_needs_replacing()
+    {
+        $this->matches("cat", "dog", 3)->shouldBe(false);
+    }
 }
