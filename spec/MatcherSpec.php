@@ -33,4 +33,13 @@ class MatcherSpec extends ObjectBehavior
         $this->caseInsensitive()->matches("needle", "can you find the need in this haystack?", 1)->shouldBe(false);
         $this->caseInsensitive()->matches("NeEdLE", "can you find the needle in this haystack?", 1)->shouldBe(true);
     }
+
+    function it_allows_forced_searches_for_inexact_matches()
+    {
+        $this->inexactly()->matches("needle", "can you find the needle in this haystack?", 3)->shouldBe(false);
+        $this->inexactly()->caseInsensitive()->matches("needle", "can you find the NEEDLE in this haystack?", 3)->shouldBe(false);
+        $this->inexactly()->matches("needle", "can you find the needl in this haystack?", 3)->shouldBe(true);
+        $this->inexactly()->matches("needle", "can you find the nee in this haystack?", 3)->shouldBe(true);
+        $this->inexactly()->matches("needle", "can you find the ne in this haystack?", 3)->shouldBe(false);
+    }
 }

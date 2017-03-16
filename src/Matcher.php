@@ -5,17 +5,38 @@ namespace DataValidata\FuzzyStrings;
 class Matcher
 {
     private $caseSensitive = true;
+    private $forceInexact = false;
+
+    private function cloneMe()
+    {
+        $newInstance = new static();
+        $newInstance->caseSensitive = $this->caseSensitive;
+        $newInstance->forceInexact = $this->forceInexact;
+        return $newInstance;
+    }
 
     public function caseInsensitive()
     {
-        $newInstance = new static();
+        $newInstance = $this->cloneMe();
         $newInstance->caseSensitive = false;
+        return $newInstance;
+    }
+
+    public function inexactly()
+    {
+        $newInstance = $this->cloneMe();
+        $newInstance->forceInexact = true;
         return $newInstance;
     }
 
     public function matches($needle, $haystack, $threshold = 0)
     {
-        return $this->minimumEditsRequired($needle, $haystack) <= $threshold;
+        $minimumEditsRequired = $this->minimumEditsRequired($needle, $haystack);
+        if($this->forceInexact && $minimumEditsRequired === 0) {
+            return false;
+        }
+
+        return $minimumEditsRequired <= $threshold;
     }
 
     /**
