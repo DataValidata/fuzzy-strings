@@ -45,7 +45,17 @@ class Matcher
 
     public function distance($needle, $haystack)
     {
-        return $this->minimumEditsRequired($needle, $haystack);
+        $minimumEditsRequired = $this->minimumEditsRequired($needle, $haystack);
+        $max = max(strlen($haystack), strlen($needle));
+        if($this->forceInexact && $minimumEditsRequired === 0) {
+            return $max;
+        }
+
+        if($minimumEditsRequired === strlen($needle)) {
+            return $max;
+        }
+
+        return $minimumEditsRequired;
     }
 
     /**
