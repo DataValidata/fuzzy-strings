@@ -47,4 +47,10 @@ class MatcherSpec extends ObjectBehavior
     {
         $this->matches("cat", "dog", 3)->shouldBe(false);
     }
+
+    function it_measures_edit_distance()
+    {
+        $this->distance("cat", "Cat")->shouldBe(1);
+        $this->caseInsensitive()->distance("cat", "Cat")->shouldBe(0);
+    }
 }

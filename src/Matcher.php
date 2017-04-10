@@ -43,6 +43,11 @@ class Matcher
         return $minimumEditsRequired <= $threshold;
     }
 
+    public function distance($needle, $haystack)
+    {
+        return $this->minimumEditsRequired($needle, $haystack);
+    }
+
     /**
      * @param $needle
      * @param $haystack
