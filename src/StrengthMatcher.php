@@ -83,7 +83,7 @@ class StrengthMatcher
         $this->fuzzyMatchers[] = [
             'name' => self::LEAD_STANDARD_MATCHER,
             'matcher' => function($str1, $str2) use($fuzzyMatcher) {
-                return $fuzzyMatcher->matches($str1, $str2, 50);
+                return $fuzzyMatcher->matches($str1, $str2, strlen($str1) / 2);
             },
             'scorer' => function($str1, $str2) use($fuzzyMatcher){
                 return self::LEAD_STANDARD
@@ -96,11 +96,10 @@ class StrengthMatcher
         $this->fuzzyMatchers[] = [
             'name' => self::LEAD_STANDARD_MATCHER,
             'matcher' => function($str1, $str2) use($caseInsensitiveFuzzyMatcher) {
-                return $caseInsensitiveFuzzyMatcher->matches($str1, $str2, 50);
+                return $caseInsensitiveFuzzyMatcher->matches($str1, $str2, strlen($str1) / 2);
             },
             'scorer' => function($str1, $str2) use($caseInsensitiveFuzzyMatcher){
                 return self::LEAD_STANDARD
-                    - self::CASE_PENALTY
                     - $caseInsensitiveFuzzyMatcher->distance($str1, $str2)
                     ;
             }
