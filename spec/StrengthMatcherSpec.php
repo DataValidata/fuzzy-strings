@@ -21,6 +21,6 @@ class StrengthMatcherSpec extends ObjectBehavior
     function it_ranks_case_insensitive_matches_higher_than_typos()
     {
         $this->matches("ciaran", "CIARAN")->shouldBeApproximately(StrengthMatcher::SILVER_STANDARD, 10);
-        $this->matches("ciarax", "CIARAN")->shouldBeApproximately(StrengthMatcher::LEAD_STANDARD, 10);
+        $this->matches("ciarax", "CIARAN")->shouldBeApproximately(StrengthMatcher::LEAD_STANDARD - StrengthMatcher::CASE_PENALTY, 10);
     }
 }
